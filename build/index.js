@@ -71,7 +71,9 @@ function Edit() {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "blogs-slide"
-  }, blogs.map(blog => {
+  }, blogs.length == 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "blog-slide__loading"
+  }, "Loading...") : '', blogs.map(blog => {
     const {
       date,
       episode_featured_image,
@@ -91,7 +93,8 @@ function Edit() {
       className: "created"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Created:"), formatDate), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: link,
-      className: "btn btn__primary"
+      className: "btn btn__primary",
+      target: "_blank"
     }, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('See more'), " ")))));
   })));
 }
