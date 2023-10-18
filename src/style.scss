@@ -1,0 +1,105 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-alx-gutermberg-slideshow {
+	background-color: #21759b;
+	color: #fff;
+	padding: 2px;
+}
+
+$radius-max: 25px;
+$radius-min: 10px;
+
+.blogs-slide {
+	
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: space-between;
+	align-self: center;
+	gap: 10px;
+	width: 80vw;
+	min-height: 420px;
+	max-height: 420px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background: gray;
+	box-sizing: border-box;
+
+	.blog--item {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		min-width: 400px;
+		max-width: 400px;
+		min-height: 300px;
+		max-height: 300px;
+		background-color: white;
+		// padding: .2rem;
+		border-radius: $radius-min;
+
+		img {
+			width: 400px;
+			height:200px;
+			cursor: pointer;
+			object-fit: cover;
+			border-radius: 5px 5px 0 0;
+		}
+		
+		.blog--item-footer {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			justify-content: start;
+			box-sizing: border-box;
+			padding: 1rem;
+			padding-top: .5rem;
+
+			h4 {
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				max-width: 100%;
+				color: gray;
+				font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+				font-weight: 400;
+				font-size: 1.5rem;
+			}
+	
+			.blog--item--info {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+	
+				.created {
+					color: blueviolet;
+				}
+	
+				.btn {
+					text-decoration: none;
+					font-size: 10px;
+					padding: .5rem 2rem;
+					background-color: white;
+					color: blueviolet;
+					border: 1px solid blueviolet;
+					border-radius: $radius-min;
+				}
+		
+				.btn__primary {
+					background-color: blueviolet;
+					color: white;
+				}
+			}
+		}
+		
+		
+	}
+}
