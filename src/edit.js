@@ -32,6 +32,7 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 
+
 export default function Edit() {
 	const [ blogs, setBlogs ] = useState( [] );
 	
@@ -50,26 +51,27 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			<div className='blogs-slide'>
+				{ blogs.length == 0 ? <p className='blog-slide__loading'>Loading...</p> : '' }
 				{
-				blogs.map( blog => {
-					const { date, episode_featured_image, title, link } = blog;
+					blogs.map( blog => {
+						const { date, episode_featured_image, title, link } = blog;
 
-					const formatDate = moment( date ).utc().format('MMMM Do YYYY');
-					return (
-						<>
-						<div className='blog--item'>
-							<img src={ episode_featured_image } />
-							<div className='blog--item-footer'>
-								<h4> { title.rendered } </h4>
-								<div className='blog--item--info'>
-									<span className='created'><strong>Created:</strong>{ formatDate }</span>
-									<a href={ link } className='btn btn__primary'> { __('See more', ) } </a>
+						const formatDate = moment( date ).utc().format('MMMM Do YYYY');
+						return (
+							<>
+							<div className='blog--item'>
+								<img src={ episode_featured_image } />
+								<div className='blog--item-footer'>
+									<h4> { title.rendered } </h4>
+									<div className='blog--item--info'>
+										<span className='created'><strong>Created:</strong>{ formatDate }</span>
+										<a href={ link } className='btn btn__primary' target='_blank'> { __('See more', ) } </a>
+									</div>
 								</div>
 							</div>
-						</div>
-						</>
-					)
-				} )
+							</>
+						)
+					} )
 				}
 			</div>
 		</p>
