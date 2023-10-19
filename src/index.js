@@ -30,4 +30,19 @@ registerBlockType( metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
+	attributes: {
+		title: {
+			source: 'html',
+			selector: 'h1',
+			default: 'register'
+		},
+		nameLabel: {
+			type: 'string',
+			default: 'Name'
+		},
+		srcAPI: {
+			type: 'string',
+			default: 'https://wptavern.com/wp-json/wp/v2/posts'
+		}
+	}
 } );
