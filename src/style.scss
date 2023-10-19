@@ -14,110 +14,144 @@
 $radius-max: 25px;
 $radius-min: 10px;
 
-.blogs-slide {
-	
+.blog-slide-wrapper {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-	justify-content: space-between;
-	align-self: center;
-	gap: 20px;
-	overflow: auto;
-	overflow-y: hidden;
-	width: 100%;
-	height: 100%;
-	padding: 2rem 0;
-	// min-height: 420px;
-	// max-height: 420px;
-	box-sizing: border-box;
-	background-color: white;
-	
-	.blog-slide__loading {
-		color: gray;
-		margin: 0;
-		padding: 0;
-		text-align: center;
-		background-color: #e4e4e4;
-		min-width: 400px;
-		max-width: 400px;
-		min-height: 300px;
-		max-height: 300px;
-		border: 2px solid #d8d8d8;
-		border-radius: $radius-min;
-		box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+	&:first-child {
+		margin-left: 23px;
 	}
 
-	.blog--item {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
-		min-width: 400px;
-		max-width: 400px;
-		min-height: 300px;
-		max-height: 300px;
-		background-color: white;
-		// padding: .2rem;
-		border-radius: $radius-min;
-		border: 1px solid gray;
-
-		img {
-			width: 400px;
-			height:200px;
-			cursor: pointer;
-			object-fit: cover;
-			border-radius: $radius-min $radius-min 0 0;
+	i {
+		&:first-child {
+			position: absolute;
+			left: 0;
 		}
+
+		&:last-child {
+			position: absolute;
+			right: 0;
+		}
+		background: blueviolet;
+		color: white;
+		width: 46px;
+		min-width: 46px;
+		height: 46px;
+		min-height: 46px;
+		line-height: 46px;
+		text-align: center;
+		border-radius: 50%;
+	}
+
+	.blogs-slide {
+		display: flex;
+		flex-direction: row;
+		position: relative;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+		align-self: center;
+		gap: 20px;
+		overflow: hidden;
+		overflow-y: hidden;
+		width: 100%;
+		height: 100%;
+		padding: 2rem 0;
+		// min-height: 420px;
+		// max-height: 420px;
+		box-sizing: border-box;
+		background-color: white;
+		scroll-behavior: smooth;
 		
-		.blog--item-footer {
+		.blog-slide__loading {
+			color: gray;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			background-color: #e4e4e4;
+			min-width: 400px;
+			max-width: 400px;
+			min-height: 300px;
+			max-height: 300px;
+			border: 2px solid #d8d8d8;
+			border-radius: $radius-min;
+			box-sizing: border-box;
+		}
+	
+		.blog--item {
 			display: flex;
 			flex-direction: column;
-			width: 100%;
-			justify-content: start;
-			box-sizing: border-box;
-			padding: 1rem;
-			padding-top: .5rem;
-
-			h4 {
-				margin: 0;
-				padding: 0;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				max-width: 100%;
-				color: gray;
-				font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-				font-weight: 400;
-				font-size: 1.5rem;
-			}
+			justify-content: space-between;
+			align-items: center;
+			width: ( 100% / 2 );
+			// min-width: 400px;
+			// max-width: 400px;
+			min-height: 300px;
+			max-height: 300px;
+			background-color: white;
+			// padding: .2rem;
+			border-radius: $radius-min;
+			border: 1px solid gray;
 	
-			.blog--item--info {
+			img {
+				width: 400px;
+				height:200px;
+				cursor: pointer;
+				object-fit: cover;
+				border-radius: $radius-min $radius-min 0 0;
+			}
+			
+			.blog--item-footer {
 				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
+				flex-direction: column;
+				width: 100%;
+				justify-content: flex-start;
+				box-sizing: border-box;
+				padding: 1rem;
+				padding-top: .5rem;
 	
-				.created {
-					color: blueviolet;
-				}
-	
-				.btn {
-					text-decoration: none;
-					font-size: 10px;
-					padding: .5rem 2rem;
-					background-color: white;
-					color: blueviolet;
-					border: 1px solid blueviolet;
-					border-radius: $radius-min;
+				h4 {
+					margin: 0;
+					padding: 0;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					max-width: 100%;
+					color: gray;
+					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+					font-weight: 400;
+					font-size: 1.5rem;
 				}
 		
-				.btn__primary {
-					background-color: blueviolet;
-					color: white;
+				.blog--item--info {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+		
+					.created {
+						color: blueviolet;
+					}
+		
+					.btn {
+						text-decoration: none;
+						font-size: 10px;
+						padding: .5rem 2rem;
+						background-color: white;
+						color: blueviolet;
+						border: 1px solid blueviolet;
+						border-radius: $radius-min;
+					}
+			
+					.btn__primary {
+						background-color: blueviolet;
+						color: white;
+					}
 				}
 			}
+			
+			
 		}
-		
-		
 	}
 }
