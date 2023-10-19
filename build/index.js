@@ -22,7 +22,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "moment");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 
 /**
  * Retrieves the translation of text.
@@ -37,6 +39,8 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
+
+
 
 
 
@@ -58,45 +62,104 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Element} Element to render.
  */
 
-function Edit() {
+function Edit(props) {
   const [blogs, setBlogs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
+  const {
+    attributes,
+    setAttributes
+  } = props;
+  const {
+    title,
+    nameLabel,
+    srcAPI
+  } = attributes;
+  const [isDragStart, setIsDragStart] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+  const [prevPageX, setPrevPageX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('');
+  const [prevScrollLeft, setPrevScrollLeft] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)();
+  const slide = document.querySelector('.blogs-slide');
+  const arrowIcon = document.querySelectorAll('.slide--item--icon');
+  const dragStart = e => {
+    setIsDragStart(true);
+    setPrevPageX(e.pageX);
+    setPrevScrollLeft(slide.scrollLeft);
+  };
+  const dragging = e => {
+    if (!isDragStart) return;
+    let positionDiff = e.pageX - prevPageX;
+    slide.scrollLeft = prevScrollLeft - positionDiff;
+  };
+  const handleArrow = e => {
+    const firstImage = document.querySelectorAll('.blog--item')[0].clientWidth + 14;
+    const firstImgWidth = firstImage;
+    slide.scrollLeft += e.target.id == 'left' ? -firstImgWidth : firstImgWidth;
+    console.log(e.target.id, firstImage);
+  };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(async () => {
-    let mainURL = 'https://wptavern.com/wp-json/wp/v2/posts';
-    fetch(mainURL).then(response => response.json()).then(json => {
+    fetch(srcAPI).then(response => response.json()).then(json => {
       console.log(json);
+      console.log(attributes);
       setBlogs(json);
     }).catch(err => console.log(err));
   }, []);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    title: "labels",
+    initialOpen: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.TextControl, {
+    label: "Name label",
+    value: nameLabel,
+    onChange: newNameLabel => setAttributes({
+      nameLabel: newNameLabel
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.TextControl, {
+    label: "API source",
+    value: srcAPI,
+    onChange: newSrcAPI => setAttributes({
+      srcAPI: newSrcAPI
+    })
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "blogs-slide"
+    className: "blog-slide-wrapper"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    id: "left",
+    className: "slide--item--icon fa-solid fa-angle-left",
+    onClick: e => handleArrow(e)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "blogs-slide",
+    onMouseMove: e => dragging(e),
+    onMouseDown: e => dragStart(e),
+    onMouseUp: e => setIsDragStart(false)
   }, blogs.length == 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "blog-slide__loading"
+    className: "blog--item blog-slide__loading"
   }, "Loading...") : '', blogs.map(blog => {
     const {
       date,
       episode_featured_image,
       title,
-      link
+      link,
+      jetpack_featured_media_url
     } = blog;
     const formatDate = moment__WEBPACK_IMPORTED_MODULE_4___default()(date).utc().format('MMMM Do YYYY');
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "blog--item"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      src: episode_featured_image
+      src: jetpack_featured_media_url
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "blog--item-footer"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", null, " ", title.rendered, " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "blog--item--info"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "created"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Created:"), formatDate), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "Created: "), formatDate), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: link,
       className: "btn btn__primary",
       target: "_blank"
     }, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('See more'), " ")))));
-  })));
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    id: "right",
+    className: "slide--item--icon fa-solid fa-angle-right",
+    onClick: e => handleArrow(e)
+  }))));
 }
 
 /***/ }),
@@ -144,7 +207,22 @@ __webpack_require__.r(__webpack_exports__);
   /**
    * @see ./edit.js
    */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"]
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  attributes: {
+    title: {
+      source: 'html',
+      selector: 'h1',
+      default: 'register'
+    },
+    nameLabel: {
+      type: 'string',
+      default: 'Name'
+    },
+    srcAPI: {
+      type: 'string',
+      default: 'https://wptavern.com/wp-json/wp/v2/posts'
+    }
+  }
 });
 
 /***/ }),
@@ -210,6 +288,16 @@ module.exports = window["wp"]["blockEditor"];
 /***/ (function(module) {
 
 module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["components"];
 
 /***/ }),
 

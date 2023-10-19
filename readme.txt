@@ -6,6 +6,16 @@ Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
+Create a slideshow
+
+Skeleton
+- CSS and html editor view.
+- Create template PHP front view.
+
+Logic
+- Create Customize section.
+
+
 Example block scaffolded with Create Block tool.
 
 == Description ==

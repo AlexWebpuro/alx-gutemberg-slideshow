@@ -18,6 +18,8 @@
 		"@wordpress/scripts": "^26.14.0"
 	},
 	"dependencies": {
+		"@wordpress/block-editor": "^12.11.1",
+		"@wordpress/components": "^25.9.1",
 		"@wordpress/element": "^5.20.0",
 		"moment": "^2.29.4"
 	}
